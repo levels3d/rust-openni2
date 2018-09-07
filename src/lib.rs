@@ -63,6 +63,8 @@
 //! }
 //! ```
 
+#![cfg_attr(feature = "try_status", feature(try_trait))]
+
 pub extern crate openni2_sys as sys;
 use std::os::raw::{c_int, c_void, c_char};
 use std::ffi::{CString, CStr};

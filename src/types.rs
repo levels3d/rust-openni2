@@ -1,10 +1,13 @@
 use std::os::raw::c_int;
 use std::fmt;
+#[cfg(feature = "try_status")]
+use std::ops::Try;
 use sys::*;
 use super::get_extended_error;
 
 /// Error state for external OpenNI2 C functions
 #[derive(Debug, Clone)]
+#[must_use = "this `Status` may be an error variant, which should be handled"]
 pub enum Status {
     /// Success
     Ok,
@@ -57,6 +60,26 @@ impl fmt::Display for Status {
 impl From<c_int> for Status {
     fn from(i: c_int) -> Self {
         Status::from_int(i)
+    }
+}
+
+#[cfg(feature = "try_status")]
+impl Try for Status {
+    type Ok = ();
+    type Error = Status;
+
+    fn into_result(self) -> Result<(), Self> {
+        match self {
+            Status::Ok => Ok(()),
+            other => Err(other),
+        }
+    }
+
+    fn from_error(value: Self) -> Self {
+        value
+    }
+    fn from_ok(_: ()) -> Self {
+        Status::Ok
     }
 }
 
