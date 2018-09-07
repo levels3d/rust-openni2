@@ -492,6 +492,8 @@ impl<'device> Drop for Stream<'device> {
     }
 }
 
+unsafe impl<'device> Send for Stream<'device> {}
+
 /// Dimensions to crop a `Stream` to. See `Stream::set_cropping`
 #[derive(Debug, Copy, Clone)]
 pub struct Cropping {
