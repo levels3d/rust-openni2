@@ -9,6 +9,7 @@ use stream::Stream;
 /// An open device. The device is closed when this struct drops out of scope.
 pub struct Device {
     pub(crate) handle: OniDeviceHandle,
+    skip_drop: bool,
 }
 
 impl fmt::Debug for Device {
@@ -68,7 +69,7 @@ impl Device {
         };
         let status = unsafe { oniDeviceOpen(uri_ptr, &mut handle ) }.into();
         match status {
-            Status::Ok => Ok(Device { handle }),
+            Status::Ok => Ok(Device { handle, skip_drop: false }),
             _ => Err(status),
         }
     }
@@ -334,9 +335,22 @@ impl Device {
     // }
 }
 
+impl From<OniDeviceHandle> for Device {
+    fn from(handle: OniDeviceHandle) -> Self {
+        Device {
+            handle,
+            skip_drop: true,
+        }
+    }
+}
+
+unsafe impl Send for Device {}
+
 impl Drop for Device {
     fn drop(&mut self) {
-        unsafe { oniDeviceClose(self.handle) };
+        if !self.skip_drop {
+            unsafe { oniDeviceClose(self.handle) };
+        }
     }
 }
 
