@@ -124,6 +124,10 @@ impl<P: Pixel> Frame<P> {
     pub fn inspect(&self) {
         println!("{:?}", self.oni_frame);
     }
+
+    pub unsafe fn as_ptr(&self) -> *mut OniFrame {
+        self.frame_pointer
+    }
 }
 
 impl<P: Pixel> Drop for Frame<P> {
