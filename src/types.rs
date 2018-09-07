@@ -89,7 +89,7 @@ impl From<c_int> for SensorType {
 
 /// One of the pixel formats that a `Stream` can use
 #[allow(non_camel_case_types)]
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
 #[repr(i32)]
 pub enum PixelFormat {
     // Depth
