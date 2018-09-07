@@ -2,7 +2,7 @@ use std::os::raw::{c_int, c_char, c_float, c_void};
 use std::{ptr, fmt, mem, slice};
 use std::ffi::{CString, CStr};
 
-use openni2_sys::*;
+use sys::*;
 use types::{Status, SensorType, ImageRegistrationMode, VideoMode, SensorInfo};
 use stream::Stream;
 

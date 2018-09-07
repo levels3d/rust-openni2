@@ -3,7 +3,7 @@ use std::ffi::CString;
 use std::path::Path;
 use types::Status;
 use stream::Stream;
-use openni2_sys::*;
+use sys::*;
 
 /// Records streams' frames to disk. After a `Recorder` is created, attach
 /// `Stream`s to it through `Recorder::attach_stream(stream: &Stream)`.

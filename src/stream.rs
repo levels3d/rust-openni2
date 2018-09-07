@@ -2,7 +2,7 @@ use std::marker::PhantomData;
 use std::os::raw::{c_int, c_float, c_void};
 use std::{ptr, fmt, mem, slice};
 
-use openni2_sys::*;
+use sys::*;
 use device::Device;
 use frame::{Frame, frame_from_pointer};
 use types::{Status, SensorType, VideoMode, SensorInfo, Pixel};

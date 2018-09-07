@@ -63,12 +63,12 @@
 //! }
 //! ```
 
-extern crate openni2_sys;
+pub extern crate openni2_sys as sys;
 use std::os::raw::{c_int, c_void, c_char};
 use std::ffi::{CString, CStr};
 use std::{mem, ptr, slice};
 use std::marker::PhantomData;
-use openni2_sys::*;
+use sys::*;
 
 mod device;
 mod stream;
@@ -91,7 +91,7 @@ pub use device::{Device, DeviceInfo};
 pub use stream::{Stream, StreamListener, Cropping};
 pub use frame::{Frame, frame_from_pointer};
 pub use recorder::Recorder;
-pub use openni2_sys::{
+pub use sys::{
     OniDepthPixel,
     OniGrayscale16Pixel,
     OniGrayscale8Pixel,

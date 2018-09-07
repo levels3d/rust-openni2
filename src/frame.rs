@@ -1,4 +1,4 @@
-use openni2_sys::*;
+use sys::*;
 use std::marker::PhantomData;
 use types::{VideoMode, Pixel, bytes_per_pixel};
 use std::{mem, slice};

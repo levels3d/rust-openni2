@@ -1,6 +1,6 @@
 use std::os::raw::c_int;
 use std::fmt;
-use openni2_sys::*;
+use sys::*;
 use super::get_extended_error;
 
 /// Error state for external OpenNI2 C functions
